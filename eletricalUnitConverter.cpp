@@ -9,7 +9,7 @@ void inidialDisplay (){
     cout << "3   -   R = V/I\n\n";
 }
 
-float askForValue (char* prompt) {
+float askForValue (const char* prompt) {
     float value;
     cout << prompt;
     cin >> value;
@@ -46,7 +46,7 @@ int main (){
 
     if (value == 1){
         current = askForValue("Enter Current: ");
-        resistance = askForValue ("Enter Resistance");
+        resistance = askForValue ("Enter Resistance: ");
         voltage = get_calculation(value, voltage, current, resistance);
         display(voltage, current, resistance);
 
