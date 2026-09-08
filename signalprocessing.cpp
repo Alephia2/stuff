@@ -17,11 +17,14 @@ void getVoltages (float N, std::vector<double> &voltages) {
     }
 }
 
-void getFilter (int N, std::vector<double> &voltages, std::vector<double> &filteredVoltages){
+void getFilter (std::vector<double> &voltages, std::vector<double> &filteredVoltages, int N, int threshold){
     for (int i = 0 ; i < N ; i++){
-        
+        if (voltages[i] > threshold){
+            voltages.push_back(filteredVoltages[i]);
+        }
     }
 }
+
 
 int main (){
     int N = askvalue("How many entries?: ");
@@ -29,7 +32,14 @@ int main (){
     getVoltages(N, voltages);
     int threshold = askvalue ("Threshhold: ");
     std::vector<double> filteredVoltages;
+    getFilter(voltages, filteredVoltages, N, threshold);
     
+    std::cout << "Filtered Voltages: " << std::endl;
+    std::cout << "----------------------------------------" << std:: endl;
+    int size = filteredVoltages.size();
+    for (int i = 0 ; i < size ; i++){
+        std::cout << "V" << size << "     -     " << filteredVoltages[i] << std::endl;
+    }
 }
 
 
