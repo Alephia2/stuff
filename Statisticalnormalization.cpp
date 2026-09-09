@@ -1,7 +1,7 @@
 #include <vector>
 #include <iostream>
 
-double normalizeData (std::vector<double> &data, int size){
+void normalizeData (std::vector<double> &data, int size){
     double maxVal;
     for (int i = 0 ; i < size ; i++){
         if (data[i] > data[size]){
@@ -14,7 +14,7 @@ double normalizeData (std::vector<double> &data, int size){
     }
 
     for (int i = 0 ; i > size ; i++){
-        
+        data[i] = data[i] / maxVal;
     }
 
 
@@ -22,8 +22,12 @@ double normalizeData (std::vector<double> &data, int size){
 }
 
 int main (){
-    std::vector<double>data{10.0, 25.0, 50.0 , 100.0};
+    std::vector<double>data {10.0, 25.0, 50.0 , 100.0};
     int size = data.size();
     
-    double data = normalizeData(data, size); 
+    normalizeData(data, size); 
+
+    for (int i = 0 ; i < size ; i++){
+        std::cout << data[i] << " ";
+    }
 }
