@@ -7,6 +7,15 @@
 
 using namespace std;
 
+float price_table[5][2] = {
+    {2.00 , 3.00},    //1 = letter                 2nd column = B&w, 3rd = colored
+    {2.00 , 3.00},   //2 = legal                          
+    {2.00 , 3.00},   //3 = a4
+    {2.00 , 3.00},   //4 = photopaper
+    {2.00 , 3.00}    //5 = sticker paper
+    
+};
+
 struct printreq {
     string name;
     string nameperson;
