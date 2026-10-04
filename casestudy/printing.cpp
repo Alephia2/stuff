@@ -9,17 +9,17 @@ using namespace std;
 
 float price_table[5][2] = {
     {2.00 , 3.00},    //1 = letter                 2nd column = B&w, 3rd = colored
-    {2.00 , 3.00},   //2 = legal                          
+    {2.00 , 4.25},   //2 = legal                          
     {2.00 , 3.00},   //3 = a4
-    {2.00 , 3.00},   //4 = photopaper
-    {2.00 , 3.00}    //5 = sticker paper
+    {2.00 , 4.50},   //4 = photopaper
+    {2.00 , 4.50}    //5 = sticker paper
     
 };
 
 struct printreq {
     string name;
     string nameperson;
-    string papersize;
+    int papersize;
     
     int colormode;
     int pages;
@@ -69,8 +69,15 @@ void newname (int queuecount, printreq queue[]){
 
 void newpapersize (int queuecount, printreq queue[]){
     cout << "-----------------------------------------" << endl;
+    cout << "Letter                -                1     "<< endl;
+    cout <<"Legal                  -                2     "<< endl;
+    cout <<"A4                     -                3     "<< endl;
+    cout <<"Photopaper            -                4     "<< endl;
+    cout <<"Sticker Paper         -                5     "<< endl;
+    cout << "-----------------------------------------" << endl;
     cout << "Paper size:                           " << endl;
     cin >> queue[queuecount].papersize;
+
 }
 
 void newcolormode (int queuecount, printreq queue[]){
@@ -96,7 +103,9 @@ void newextra(int queuecount, printreq queue[]){
 }
 
 void calculatecost (int queuecount, printreq queue[]){
-    queue[queuecount].cost = queue[queuecount].pages * queue[queuecount].copies * costperpage;
+    int valuesize = queue[queuecount.papersize];
+    int valuecolormode = queue[queuecount.colormode];
+    queue[queuecount].cost = queue[queuecount].pages * queue[queuecount].copies * price_table[valuesize][valuecolormode];
 
 }
 
@@ -156,6 +165,9 @@ char processnextorder (int queuecount, printreq queue[]){
 }
 
 char printreceipt (int queuecount, printreq queue[]){
+    int valuesize = queue[queuecount.papersize];
+    int valuecolormode = queue[queuecount.colormode];
+
     cout << "================================" << endl;
     cout << "        PRINTFLOW RECEIPT"<< endl;
     cout << "Queue No:                  " << queue[queuecount].queuenum << endl;
@@ -177,13 +189,12 @@ char printreceipt (int queuecount, printreq queue[]){
     cout << "Pages/copies:            " << queue[queuecount].pages << endl;
     cout << "Total Pages:             " << queue[queuecount].pages * queue[queuecount].copies << endl;
     cout << "-------------------------------" << endl;
-    cout << "Unit Price:              " << endl;
-    cout << "Base cost:               " << endl;
-    cout << "binding Fee:             " << endl;
+    cout << "Unit Price:              " << price_table[valuesize][valuecolormode]<<endl;
+    cout << "binding:             " << queue[queuecount].extra << endl;
     cout << "-------------------------------" << endl;
-    cout << "Total Due:                " << endl;
+    cout << "Total Due:                " << queue[queuecount].cost << endl;
     cout << "-------------------------------" << endl;
-    cout << "Status:                   " << endl;
+    cout << "Status:                   " << "Completed" << endl;
     cout << "================================" << endl;
     cout << "Thank you for Printing with PRINTFLOW!";
     cout << "================================" << endl;
